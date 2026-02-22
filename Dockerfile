@@ -10,7 +10,7 @@ WORKDIR /app
 RUN wget https://release.66666.host/v2.27.2/2.27.2_wanji/lucky_2.27.2_Linux_x86_64_wanji.tar.gz && \
     tar -zxvf lucky_2.27.2_Linux_x86_64_wanji.tar.gz && \
     rm lucky_2.27.2_Linux_x86_64_wanji.tar.gz && \
-    chmod +x openlist lucky
+    chmod +x lucky
 
 # 复制 nginx 代理配置
 COPY nginx/lucky-proxy.conf /etc/nginx/http.d/default.conf
