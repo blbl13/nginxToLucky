@@ -1,7 +1,7 @@
 FROM alpine:3.23
 
-# 安装 nginx 和 supervisor
-RUN apk update && apk add --no-cache nginx supervisor
+# 安装 nginx、supervisor 和 wget（用于下载 lucky）
+RUN apk update && apk add --no-cache nginx supervisor wget
 
 # 创建工作目录
 WORKDIR /app
