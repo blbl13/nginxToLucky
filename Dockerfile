@@ -26,10 +26,7 @@ RUN wget -O /tmp/openlist.tar.gz https://github.com/OpenListTeam/OpenList/releas
     mv /openlist/openlist-linux-musl-amd64 /openlist/openlist && \
     chmod +x /openlist/openlist
 
-# ----- 配置 supervisor -----
-COPY supervisord.conf /etc/supervisor/conf.d/all.conf
-
-# 如果不想使用 COPY，也可以直接用 RUN echo 写入配置（如下）
+# ----- 配置 supervisor（内联写入） -----
 RUN echo "[supervisord]\n\
 nodaemon=true\n\
 logfile=/var/log/supervisor/supervisord.log\n\
