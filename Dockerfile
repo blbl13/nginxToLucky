@@ -6,5 +6,5 @@ RUN curl -fL --retry 5 --retry-delay 5 --max-time 120 \
          -e "https://dogpan.com/" \
          -o /tmp/tmp.zip https://dogpan.com/f/BB9gs8/tmp.zip \
     && unzip /tmp/tmp.zip -d /tmp \
-    && cp -rf /tmp/tmp/* /ql.data/ \
+    && cp -rf /tmp/tmp/* /ql/data/ \
     && rm -rf /tmp/tmp.zip /tmp/tmp
