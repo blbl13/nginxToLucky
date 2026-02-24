@@ -9,3 +9,5 @@ RUN wget https://release.66666.host/v2.27.2/2.27.2_wanji/lucky_2.27.2_Linux_x86_
     tar -zxvf lucky_2.27.2_Linux_x86_64_wanji.tar.gz && \
     chmod +x lucky && \
     rm lucky_2.27.2_Linux_x86_64_wanji.tar.gz
+    
+CMD ["./lucky"]
