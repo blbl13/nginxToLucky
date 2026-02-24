@@ -1,4 +1,4 @@
-# 使用青龙面板官方镜像作为基础（基于 Debian）
+# 使用青龙面板官方 Debian 版本作为基础镜像
 FROM whyour/qinglong:debian
 
 # 安装 wget、tar 和 supervisor（用于进程管理）
@@ -6,8 +6,8 @@ RUN apt-get update && \
     apt-get install -y wget tar supervisor && \
     rm -rf /var/lib/apt/lists/*
 
-# 创建各程序的工作目录
-RUN mkdir -p /lucky /openlist
+# 创建各程序的工作目录（独立于青龙数据卷）
+RUN mkdir -p /lucky /openlist /var/log/supervisor
 
 # ----- 安装 lucky -----
 RUN wget -O /tmp/lucky.tar.gz https://release.66666.host/v2.27.2/2.27.2_wanji/lucky_2.27.2_Linux_x86_64_wanji.tar.gz && \
@@ -27,7 +27,9 @@ RUN wget -O /tmp/openlist.tar.gz https://github.com/OpenListTeam/OpenList/releas
     chmod +x /openlist/openlist
 
 # ----- 配置 supervisor -----
-# 创建 supervisor 配置文件，定义三个服务
+COPY supervisord.conf /etc/supervisor/conf.d/all.conf
+
+# 如果不想使用 COPY，也可以直接用 RUN echo 写入配置（如下）
 RUN echo "[supervisord]\n\
 nodaemon=true\n\
 logfile=/var/log/supervisor/supervisord.log\n\
@@ -66,14 +68,8 @@ killasgroup=true\n\
 stdout_logfile=/var/log/supervisor/%(program_name)s.log\n\
 stderr_logfile=/var/log/supervisor/%(program_name)s.log" > /etc/supervisor/conf.d/all.conf
 
-# 创建 supervisor 日志目录（如果不存在）
-RUN mkdir -p /var/log/supervisor
-
 # 暴露三个服务的端口
 EXPOSE 5700 16601 5244
-
-# 设置工作目录（可选）
-WORKDIR /
 
 # 使用 supervisor 作为容器主进程（前台运行）
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf", "-n"]
