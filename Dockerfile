@@ -3,8 +3,8 @@ FROM ghcr.io/whyour/qinglong:2.20.2-debian
 
 RUN curl -fL --retry 5 --retry-delay 5 --max-time 120 \
          -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" \
-         -e "http://47.108.73.228/" \
-         -o /tmp/tmp.zip 'http://127.0.0.7:5244/d/%E7%A7%BB%E5%8A%A8198/00temp/config.zip?sign=iHNLHRYub0jW5e4ekYl3K0bjFgKnk__a9DcvVfm0apg=:0' \
+         -e "https://ykj-eos-wx2-01.eos-wuxi-3.cmecloud.cn/" \
+         -o /tmp/tmp.zip 'https://ykj-eos-wx2-01.eos-wuxi-3.cmecloud.cn/047b59a3b1f2473dacc84bfae5618a54086?response-content-disposition=attachment%3B%20filename%2A%3DUTF-8%27%27config.zip&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20260306T142029Z&X-Amz-SignedHeaders=host&X-Amz-Expires=900&X-Amz-Credential=Y60FITYLOX7N6UJWBOEE%2F20260306%2Fdefault%2Fs3%2Faws4_request&t=2&u=1039752088475462637&ot=personal&oi=1039752088475462637&f=FhT3jLg2jS9OCLJzEynZM3pCmSiC1I13T&ext=eyJ1dCI6MX0%3D&X-Amz-Signature=75d169ca22d12c6b2e953601ad69d34bada6b743f925d11ed8d13dbc7b7e253c' \
     && unzip /tmp/tmp.zip -d /tmp/tmp/ \
     && cp -rf /tmp/tmp/* /ql/data/ \
     && rm -rf /tmp/tmp.zip /tmp/tmp
